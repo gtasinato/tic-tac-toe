@@ -1,4 +1,3 @@
-
 class Board:
     def __init__(self) -> None:
         self.board = [[0 for i in range(3)] for i in range(3)]
@@ -48,9 +47,29 @@ if __name__=="__main__":
     print("Starting the game")
     instance=Board()
     instance.plot()
+    indexes = set([0, 1, 2])
+
     while not instance.finished:
-        a = int(input("Which row [0/1/2]? "))
-        b = int(input("Which column [0/1/2]? "))
+        a = input("Which row [0/1/2]? ")
+        try:
+            a = int(a)
+        except ValueError:
+            print("Invalid input. Please pick a valid row.")
+            continue
+
+        if a not in indexes:
+            print("Please pick a valid row.")
+            continue
+        b = input("Which column [0/1/2]? ")
+        try:
+            b = int(b)
+        except ValueError:
+            print("Invalid input. Please pick a valid column.")
+            continue
+        
+        if b not in indexes:
+            print("Please pick a valid column")
+            continue
         position = tuple([a,b])
         instance.move(position)
         instance.is_finished()
